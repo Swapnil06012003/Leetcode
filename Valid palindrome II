@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int ispalindrome(int l,int r, string s){
+        int a=l,b=r;
+        while(a<=b){
+            if(s[a]!=s[b])  return 0;
+            a++;
+            b--;
+        }
+        return 1;    
+    }
+    bool validPalindrome(string s) {
+       int l=0,r=s.size()-1,flag=0;
+       while(l<=r){
+            if(s[l]!=s[r] && flag==0){
+               int a=ispalindrome(l+1,r,s);
+               int b=ispalindrome(l,r-1,s);
+               if(a==0 && b==0) return false;
+               flag=1;
+           }
+           l++;
+           r--;
+       }
+       return true; 
+    }
+};
