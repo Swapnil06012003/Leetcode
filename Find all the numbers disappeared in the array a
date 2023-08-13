@@ -1,0 +1,15 @@
+vector<int> findDisappearedNumbers(vector<int>& nums) {
+       unordered_map<int, int> freqMap;
+       sort(nums.begin(), nums.end());
+       vector<int> ans;
+       for (auto i: nums){
+         freqMap[i]++;
+       }
+       for (int i = 1; i <= nums.size(); i++){
+         auto it = freqMap.find(i);
+         if(it == freqMap.end()){
+           ans.push_back(i);
+         }
+       }
+       return ans;
+    }
