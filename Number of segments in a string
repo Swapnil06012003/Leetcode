@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countSegments(string s) {
+        if(s.size()==0) return 0;
+        string st="";
+        vector<string> v;
+        for(int i=0;i<s.size();i++){
+            if(s[i]==' ' && st.size()>0){
+            v.push_back(st);
+            st.clear();
+            }
+        else if(s[i]!=' '){
+            st+=s[i];
+            }
+        }
+        if(st.size()>0) v.push_back(st);
+        return v.size();
+    }
+};
