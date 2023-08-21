@@ -1,0 +1,25 @@
+class Solution {
+public:
+    
+    vector<vector<int>> ans;
+    void solve(vector<int> &ds, vector<int> & nums, vector<bool> freq){
+        if(ds.size()==nums.size()){ans.push_back(ds);return;}
+        for(int i=0;i<nums.size();++i){
+            if(!freq[i]){
+                freq[i]=true;
+                ds.push_back(nums[i]);
+                solve(ds,nums,freq);
+                ds.pop_back();
+                freq[i]=false;
+            }
+        }
+    }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<int> ds;
+        const int n = nums.size();
+        vector<bool> freq(n,false);
+        solve(ds,nums,freq);
+        return ans;
+    }
+};
