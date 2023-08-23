@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int help(vector<vector<int>>& v, int row, int index, vector<vector<int>>& dp){
+        if(row==v.size()-1) return dp[row][index]=v[row][index];
+        if(dp[row][index]!=-1)  return dp[row][index];
+        int minsum=INT_MAX;
+        minsum=min(v[row][index]+help(v,row+1,index,dp),v[row][index]+help(v,row+1,index+1,dp));
+        return dp[row][index]=minsum;
+    }
+    int minimumTotal(vector<vector<int>>& v) {
+        if(v.size()==1) return v[0][0];
+        vector<vector<int>> dp(v.size(),vector<int>(v.size(),-1));
+        return help(v,0,0,dp);
+    }
+};
