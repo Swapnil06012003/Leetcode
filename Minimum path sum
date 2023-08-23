@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int help(vector<vector<int>>& v, int i, int j, int m, int n,vector<vector<int>>& dp){
+        if(i==m-1 && j==n-1)    return dp[i][j]=v[i][j];
+        if(dp[i][j]!=-1)    return dp[i][j];
+        int mincost=INT_MAX;
+        if(i<m-1 && j<n-1)  mincost=v[i][j]+min(help(v,i+1,j,m,n,dp),help(v,i,j+1,m,n,dp));
+        else if(i==m-1) mincost=v[i][j]+help(v,i,j+1,m,n,dp);
+        else    mincost=v[i][j]+help(v,i+1,j,m,n,dp);
+        return dp[i][j]=mincost;
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        vector<vector<int>> dp(grid.size(),vector<int>(grid[0].size(),-1));
+        return help(grid,0,0,grid.size(),grid[0].size(),dp);
+    }
+};
