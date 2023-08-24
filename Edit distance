@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int help(string w1, string w2, int i, int j, vector<vector<int>>& dp){
+        if(i==w1.size())    return w2.length()-j;
+        if(j==w2.size())    return w1.length()-i;
+        if(dp[i][j]!=-1)    return dp[i][j];
+        int ans=0;
+        if(w1[i]==w2[j])    return help(w1,w2,i+1,j+1,dp);
+        else{
+            int inans=1+help(w1,w2,i,j+1,dp);
+            int delans=1+help(w1,w2,i+1,j,dp);
+            int repans=1+help(w1,w2,i+1,j+1,dp);
+            ans=min(inans,min(delans,repans));
+        }
+        return dp[i][j]=ans;
+    }
+    int minDistance(string w1, string w2) {
+        vector<vector<int>>dp(w1.size(),vector<int>(w2.size(),-1));
+        return help(w1,w2,0,0,dp);
+    }
+};
