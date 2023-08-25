@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void help(vector<int>& nums, int target, int i, int cursum, vector<int>  temp){
+        if(cursum>target)   return;
+        if(i==nums.size()){
+            if(cursum==target)  ans.push_back(temp);
+            return;
+        }
+        cursum+=nums[i];
+        temp.push_back(nums[i]);
+        help(nums,target,i,cursum,temp);
+        cursum-=nums[i];
+        temp.pop_back();
+
+        help(nums, target, i+1,cursum,temp);
+    }
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
+        vector<int> temp;
+        help(nums,target,0,0,temp);
+        return ans;
+
+    }
+};
