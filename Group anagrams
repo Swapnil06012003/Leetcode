@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string,int> mp;
+        vector<vector<string>> soln;
+        for(auto i:strs){
+            string temp=i;
+            sort(i.begin(),i.end());
+            bool got=false;
+            if(mp[i])
+            {
+                soln[mp[i]-1].push_back(temp);
+            }
+            else{
+                soln.push_back({temp});
+                mp[i]=soln.size();
+            }
+        }
+        return soln;
+    }
+};
