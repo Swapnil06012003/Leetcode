@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void help(int n, int k, int pos, vector<int>&set, vector<vector<int>>& ans ){
+        if(pos>n-k+1)   return;
+        if(k==0){
+            ans.push_back(set);
+            return;
+        }
+        if(pos>n) return;
+
+        set.push_back(pos);
+        help(n,k-1,pos+1,set,ans);
+
+        set.pop_back();
+        help(n,k,pos+1,set,ans);
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> ans;
+        vector<int> set;
+        help(n,k,1,set,ans);
+        return ans;
+    }
+};
