@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<vector<int>> help(vector<int>& v, int i){
+
+    if(i>=v.size()) return {{}};
+    vector<vector<int>> halfans=help(v,i+1);
+    vector<vector<int>> ans;
+    for(vector<int> x: halfans)  ans.push_back(x);
+    for(vector<int> x: halfans){
+        x.push_back(v[i]);
+        sort(x.begin(),x.end());
+        if(find(ans.begin(),ans.end(),x)==ans.end())
+            ans.push_back(x);
+    }
+    return ans;
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        return help(nums,0);
+    }
+};
