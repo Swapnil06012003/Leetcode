@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void help(int n, int k, int i, vector<int>& subset, vector<vector<int>>&ans,int sum) {
+        if(subset.size()>k) return;
+        if(i>n) return;
+        if(sum==n && subset.size()==k){
+            ans.push_back(subset);
+            return ;
+        }
+        if(i==10)   return;
+        
+        sum+=i;
+        subset.push_back(i);
+        help(n,k,i+1,subset,ans,sum);
+        sum-=i;
+        subset.pop_back();
+
+        help(n,k,i+1,subset,ans,sum);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>> ans;
+        vector<int> subset;
+        help(n,k,1,subset,ans,0);
+        return ans;     
+    }
+};
