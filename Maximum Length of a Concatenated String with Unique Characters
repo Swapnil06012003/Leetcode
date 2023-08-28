@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool uniqueCharacters(string str){
+    sort(str.begin(), str.end());
+ 
+    for (int i = 0; i < str.length()-1; i++) {
+        if (str[i] == str[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+    }
+    void help(vector<string>& arr, string s,int& max,int i){
+
+        if(i==arr.size())   return ;
+
+        string temp=s+arr[i];
+        if(uniqueCharacters(temp)){
+            if(temp.size()>max)    max=temp.size();
+            help(arr,temp,max,i+1);
+        }
+        
+        help(arr,s,max,i+1);
+    }
+    int maxLength(vector<string>& arr) {
+        int max=0;
+        help(arr,"",max,0);
+        return max;   
+    }
+};
