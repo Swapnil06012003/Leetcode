@@ -3,12 +3,13 @@ public:
     void help(int n, int k, int i, vector<int>& subset, vector<vector<int>>&ans,int sum) {
         if(subset.size()>k) return;
         if(i>n) return;
+        if(sum>n)   return;   
         if(sum==n && subset.size()==k){
             ans.push_back(subset);
             return ;
         }
         if(i==10)   return;
-        
+
         sum+=i;
         subset.push_back(i);
         help(n,k,i+1,subset,ans,sum);
