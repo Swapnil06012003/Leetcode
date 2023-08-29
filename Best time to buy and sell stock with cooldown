@@ -1,0 +1,65 @@
+class Solution {
+public:
+    
+    // state 0 ==> we have to sell
+    
+    // state 1 ==> we have to buy
+    
+    // declare a dp
+    
+    int dp[5005][2];
+    
+    int helper(vector<int>& arr, int i, int n, int state)
+    {
+        // base case
+        
+        if(i >= n)
+            return 0;
+        
+        // if already calculated
+        
+        if(dp[i][state] != -1)
+            return dp[i][state];
+        
+        int profit = 0;
+        
+        // if state is 0, then either sell the current stock or not sell the current stock
+        
+        if(state == 0)
+        {
+            int sell = arr[i] + helper(arr, i + 2, n, 1);
+            
+            int not_sell = helper(arr, i + 1, n, 0);
+            
+            profit =  max(sell, not_sell);
+        }
+        
+        // if state is 1, then either buy the current stock or not buy the current stock
+        
+        else if(state == 1)
+        {
+            int buy = -arr[i] + helper(arr, i + 1, n, 0);
+            
+            int not_buy = helper(arr, i + 1, n, 1);
+            
+            profit = max(buy, not_buy);
+        }
+        
+        // store the result and return it
+        
+        return dp[i][state] = profit;
+    }
+    
+    int maxProfit(vector<int>& arr) {
+        
+        int n = arr.size();
+        
+        // initialize dp with -1
+        
+        memset(dp, -1, sizeof(dp));
+        
+        // call helper function
+        
+        return helper(arr, 0, n, 1);
+    }
+};
