@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+
+        int rows = board.size();
+        int cols = board[0].size();
+
+        vector<vector<int>> copy(board);
+
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<cols; j++)
+            {
+
+                int liveNeighbors = 0; 
+                
+                for(int m=i-1; m<i+2; m++)
+                {
+                    for(int n=j-1; n<j+2; n++)
+                    {
+                        if(m==i && n==j)
+                            continue;
+                        if(m>=0 && m<rows && n>=0 && n<cols && copy[m][n] == 1)
+                            liveNeighbors++;
+                    }
+                }
+                if(liveNeighbors < 2 || liveNeighbors > 3)
+                    board[i][j] = 0;
+
+                else if(liveNeighbors == 3)
+                    board[i][j] = 1;
+
+            }
+        }
+    }
+};
