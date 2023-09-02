@@ -1,0 +1,25 @@
+bool isToeplitzMatrix(vector<vector<int>>& matrix) {
+        
+        vector<int> row(matrix[0].size());
+        for(int i=0;i<matrix[0].size();i++){
+            row[i]= matrix[0][i];
+        }
+        int j=1;
+        while(j<matrix.size()){
+            int ck;
+            for(int i=0;i<matrix[0].size();i++){
+                if(i==0){
+                    ck= row[i];
+                   row[i]= matrix[j][i];
+                }
+                else{
+                    if(ck!=matrix[j][i]) return false;
+                    ck= row[i];
+                    row[i]= matrix[j][i];
+                }
+            }
+            j++;
+        }
+        
+        return true;
+    }
