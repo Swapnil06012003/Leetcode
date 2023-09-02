@@ -1,0 +1,21 @@
+class Solution {
+public:
+    using Point = std::vector<int32_t>;
+
+    double triangleArea(Point const& p0, Point const& p1, Point const& p2) {
+        return 0.5 * std::abs((p1[0] - p0[0]) * (p2[1] - p0[1]) - (p2[0] - p0[0]) * (p1[1] - p0[1]));
+    }
+
+    double largestTriangleArea(vector<vector<int>>& points) {
+        double result = 0.0;
+        for(int32_t i = 0; i < points.size(); i++) {
+            for(int32_t j = i + 1; j < points.size(); j++) {
+                for(int32_t k = j + 1; k < points.size(); k++) {
+                    double area = triangleArea(points[i], points[j], points[k]);
+                    result = std::max(result, area);
+                }
+            }
+        }
+        return result;
+    }
+};
