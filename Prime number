@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countPrimes(int n) {
+        //Use linear sieve method to solve
+        vector<bool> sieve(n);
+        if (n<=2) return 0;
+        vector<int> prime={2};
+	    for (int&& i=3; i<n; i+=2)
+	    {
+		    if (!sieve[i]) prime.push_back(i);
+		    for (int&& j=0; i*prime[j]<n; j++)
+		    {
+			    sieve[i*prime[j]] = 1;
+			    if (i % prime[j] == 0) break;
+		    }
+	    }
+        return prime.size();
+    }
+};
