@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void explore(vector<vector<char>>& cell, int i, int j){
+
+        if(cell[i][j]=='1') cell[i][j]='*';
+
+        if(i>0 && cell[i-1][j]=='1')    explore(cell,i-1,j);
+        if(i<cell.size()-1 && cell[i+1][j]=='1')    explore(cell,i+1,j);
+        if(j>0 && cell[i][j-1]=='1')    explore(cell,i,j-1);
+        if(j<cell[0].size()-1 && cell[i][j+1]=='1') explore(cell,i,j+1);
+
+        return ; 
+    }
+    int numIslands(vector<vector<char>>& board) {
+        int row=board.size();
+        int col=board[0].size();
+
+        int count=0;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(board[i][j]=='1'){
+                    explore(board,i,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
