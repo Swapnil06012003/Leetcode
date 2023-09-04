@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void explore(vector<vector<char>>& cell, int i, int j){
+
+        if(cell[i][j]=='O') cell[i][j]='*';
+
+        if(i>0 && cell[i-1][j]=='O')    explore(cell,i-1,j);
+        if(i<cell.size()-1 && cell[i+1][j]=='O')    explore(cell,i+1,j);
+        if(j>0 && cell[i][j-1]=='O')    explore(cell,i,j-1);
+        if(j<cell[0].size()-1 && cell[i][j+1]=='O') explore(cell,i,j+1);
+
+        return ; 
+    }
+    void solve(vector<vector<char>>& board) {
+
+        int row=board.size();
+        int col=board[0].size();
+
+        for(int i=0;i<row;i++) if(board[i][0]=='O')    explore(board,i,0);
+        for(int i=0;i<row;i++) if(board[i][col-1]=='O') 
+            explore(board,i,col-1);
+        for(int j=0;j<col;j++)  if(board[0][j]=='O')    explore(board,0,j);
+        for(int j=0;j<col;j++)  if(board[row-1][j]=='O')    
+            explore(board,row-1,j);  
+
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                if(board[i][j]=='O')    board[i][j]='X';
+                else if(board[i][j]=='*')   board[i][j]='O';
+            }
+        }  
+
+    }
+};
