@@ -1,0 +1,18 @@
+
+class Solution {
+public:
+
+    bool carPooling(vector<vector<int>>& trips, int capacity) {
+        
+        unordered_map<int,int>mpp;
+        for(auto &it : trips)
+        {
+           for(int i = it[1];i<it[2];++i)
+           {
+               mpp[i]+=it[0];
+               if(mpp[i] > capacity) return 0;
+           }
+        }
+        return 1;  
+    }
+};
