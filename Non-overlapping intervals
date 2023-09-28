@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end());
+        int last=0,ans=0;
+        for(int current=1;current<intervals.size();current++){
+            if(intervals[current][0]<intervals[last][1]){
+                ans++;
+                if(intervals[current][1]<=intervals[last][1])   last=current;
+            }
+            else last=current;
+        }
+        return ans;
+    }
+};
